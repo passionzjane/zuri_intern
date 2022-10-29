@@ -4,7 +4,7 @@ const port = 3000
 const app = express()
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     const person = {
         slackUsername: 'janeStack',
         backend: true,
@@ -12,7 +12,9 @@ app.get('/', (req, res) => {
         bio: 'love to code'
 
     }
-    res.send(person)
+    res.status(200).json({
+        data: person
+    })
 })
 
 app.listen(port, () => console.log(`App is running on port ${port}`))
