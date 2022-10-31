@@ -15,10 +15,7 @@ app.get('/', async (req, res) => {
         bio: 'love to code'
 
     }
-    res.status(200).json({
-        status: true,
-        data: person
-    })
+    res.status(200).json(person)
 })
 
 app.listen(port, () => console.log(`App is running on port ${port}`))
