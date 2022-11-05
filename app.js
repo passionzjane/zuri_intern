@@ -20,46 +20,54 @@ app.get('/', async (req, res) => {
 })
 
 
-app.post('/operations', async (req, res) => {
+app.post('/operations', (req, res) => {
+    var {operation_type, x, y} = req.body;
+    operation_type = operation_type.toLowerCase()
+    
     const Enum = {
-        addition: "addition",
-        subtraction: "subtraction",
-        multiplication: "multiplication"
+        addition: 'addition',
+        subtraction: 'subtraction',
+        multiplication: 'multiplication'
     }
-    
-    
-    var {operation_type, x, y } = req.body;
-    operation_type = operation_type.toLowerCase();
+                                            
+            if(operation_type === Enum.addition){
+                res.status(200).json({
+                    slackUsername: "janeStack",
+                    result: x + y,
+                    operation_type: Enum.addition
+                    
+                })
+            }
+            else if(operation_type === Enum.subtraction){
+                res.status(200).json({
+                    slackUsername: "janeStack ",
+                    result: x - y,
+                    operation_type: Enum.subtraction
+                })
+            }
+            else if(operation_type === Enum.multiplication){
+                res.status(200).json({
+                    slackUsername: "janeStack",
+                    result: x * y,
+                    operation_type: Enum.multiplication
+                })
+            }
+            else{
+                return res.status(400).json({
+                    slackUsername: "janeStack",
+                    result: null,
+                    operation_type: "operation not found"
+                })
+            }
 
-    if(operation_type === 'addition') {
 
-        return res.status(200)
-        .json({
-            slackUsername: "janeStack",
-            result: x + y,
-            operation_type: Enum.addition
-        })
-    }
 
-    if(operation_type === 'subtraction') {
 
-        return res.status(200)
-        .json({
-            slackUsername: "janeStack",
-            result: x - y,
-            operation_type: Enum.subtraction
-        })
-    }
 
-    if(operation_type === 'multiplication') {
 
-        return res.status(200)
-        .json({
-            slackUsername: "janeStack",
-            result: x * y,
-            operation_type: Enum.multiplication
-        })
-    }
+
+
+   
 })
 
 app.listen(port, () => console.log(`App is running on port ${port}`))
