@@ -20,7 +20,7 @@ app.get('/', async (req, res) => {
 })
 
 
-app.post('/', async (req, res) => {
+app.post('/operations', async (req, res) => {
     const Enum = {
         addition: "addition",
         subtraction: "subtraction",
